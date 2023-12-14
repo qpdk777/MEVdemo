@@ -142,9 +142,11 @@ class MevBot:
 
 def main():
     with open('test/initial_balance.json', 'r') as file:
+        # print(json.loads(file.read()))
         bot = MevBot(file.read())
     # print(bot.initial_balance_dict)
     with open('test/request_list.json') as file:
+        # print(json.loads(file.read()))
         bot.set_request_list_json(file.read())
     # bot.find_best_transfer_set(bot.initial_balance_dict, bot.request_list)
 

@@ -1,10 +1,49 @@
 # 导论
 
-本项目基于模拟退火算法和贪心算法实现了一个 MEV 机器人，可以在一系列交易请求中选择出最优的转账集使得收益最大化
+本项目基于模拟退火算法和贪心算法实现了一个 MEV 机器人，可以在一系列交易请求中选择出最优的转账集使得收益尽可能最大化。
 
 # 使用方法
 
+```bash
+git clone https://github.com/qpdk777/MEVdemo.git
+```
 
+将 `MevBot` 导入你的 python 程序并创建对象。所有数据交互均使用 JSON 格式。
+
+example.py：
+
+```python
+import json
+import MevBot
+
+initial_balance = '[{"user": "A", "balance": 0.1}, {"user": "B", "balance": 100}, {"user": "C", "balance": 0}, {"user": "D", "balance": 1357}, {"user": "E", "balance": 8}]'
+requests = '[[{"from": "A", "to": "B", "amount": 0.1, "fee": 0}, {"from": "B", "to": "C", "amount": 9, "fee": 1}, {"from": "C", "to": "E", "amount": 9, "fee": 8}], [{"from": "D", "to": "A", "amount": 0.1, "fee": 10}, {"from": "C", "to": "B", "amount": 9, "fee": 2}, {"from": "D", "to": "C", "amount": 200, "fee": 0}], [{"from": "C", "to": "B", "amount": 40, "fee": 20}]]'
+
+bot = MevBot.MevBot(initial_balance)
+bot.set_request_list_json(requests)
+
+mev, request_list, transfer_list = bot.get_mev(initial_temperature=10000, max_iterations=10000, cooling_rate=0.97)
+
+print("MEV: ", mev)
+print("Transactions: \n", json.dumps(transfer_list, indent=4))
+```
+
+输出如下：
+
+```python
+MEV:  39
+Transactions: 
+ [
+    {
+        "from": "D",
+        "to": "A",
+        "amount": 0.1,
+        "fee": 10,
+        "index": 4
+    },
+    ...
+]
+```
 
 # 算法设计
 
@@ -88,3 +127,9 @@
 如果某一笔转账的 from 和 to 不在初始化的用户集中，删除该笔转账。
 
 若某一个请求为空，删除该请求。
+
+# 局限性
+
+模拟退火算法只能找到局部最优解，而不能找到整体最优。
+
+目前看来，该问题是 NP 问题，并没有 trivial 的多项式复杂度的解法。
