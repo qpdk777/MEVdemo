@@ -62,7 +62,12 @@ class MevBot:
 
             temperature *= cooling_rate
 
-        return best_mev, best_permutation, best_best_transfer_list
+        user_ending_balance = deepcopy(self.initial_balance_dict)
+        for transfer in best_best_transfer_list:
+            user_ending_balance[transfer['from']] -= transfer['amount'] + transfer['fee']
+            user_ending_balance[transfer['to']] += transfer['amount']
+
+        return best_mev, best_permutation, best_best_transfer_list, user_ending_balance
 
     @staticmethod
     def generate_neighbor(original_request_list):
@@ -150,7 +155,7 @@ def main():
         bot.set_request_list_json(file.read())
     # bot.find_best_transfer_set(bot.initial_balance_dict, bot.request_list)
 
-    mev, request_list, transfer_list = bot.get_mev()
+    mev, request_list, transfer_list, user_ending_balance = bot.get_mev()
     print("MEV: ", mev)
     # print(request_list)
     print("Transactions: \n", json.dumps(transfer_list, indent=4))

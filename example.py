@@ -11,7 +11,8 @@ requests = '[[{"from": "A", "to": "B", "amount": 0.1, "fee": 0}, {"from": "B", "
 bot = MevBot.MevBot(initial_balance)
 bot.set_request_list_json(requests)
 
-mev, request_list, transfer_list = bot.get_mev(initial_temperature=10000, max_iterations=10000, cooling_rate=0.97)
+mev, request_list, transfer_list, user_ending_balance = bot.get_mev(initial_temperature=10000, max_iterations=10000, cooling_rate=0.97)
 
 print("MEV: ", mev)
+print("User Balance After Transaction: \n", json.dumps(user_ending_balance, indent=4))
 print("Transactions: \n", json.dumps(transfer_list, indent=4))
