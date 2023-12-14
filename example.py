@@ -1,8 +1,12 @@
 import json
 import MevBot
 
-initial_balance = '[{"user": "A", "balance": 0.1}, {"user": "B", "balance": 100}, {"user": "C", "balance": 0}, {"user": "D", "balance": 1357}, {"user": "E", "balance": 8}]'
-requests = '[[{"from": "A", "to": "B", "amount": 0.1, "fee": 0}, {"from": "B", "to": "C", "amount": 9, "fee": 1}, {"from": "C", "to": "E", "amount": 9, "fee": 8}], [{"from": "D", "to": "A", "amount": 0.1, "fee": 10}, {"from": "C", "to": "B", "amount": 9, "fee": 2}, {"from": "D", "to": "C", "amount": 200, "fee": 0}], [{"from": "C", "to": "B", "amount": 40, "fee": 20}]]'
+initial_balance = '[{"user": "A", "balance": 0.1}, {"user": "B", "balance": 100}, {"user": "C", "balance": 0}, ' \
+                  '{"user": "D", "balance": 1357}, {"user": "E", "balance": 8}] '
+requests = '[[{"from": "A", "to": "B", "amount": 0.1, "fee": 0}, {"from": "B", "to": "C", "amount": 9, "fee": 1}, ' \
+           '{"from": "C", "to": "E", "amount": 9, "fee": 8}], [{"from": "D", "to": "A", "amount": 0.1, "fee": 10}, ' \
+           '{"from": "C", "to": "B", "amount": 9, "fee": 2}, {"from": "D", "to": "C", "amount": 200, "fee": 0}], ' \
+           '[{"from": "C", "to": "B", "amount": 40, "fee": 20}]] '
 
 bot = MevBot.MevBot(initial_balance)
 bot.set_request_list_json(requests)
