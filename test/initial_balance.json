@@ -1,0 +1,7 @@
+[
+  {"user": "A", "balance": 0.1},
+  {"user": "B", "balance": 100},
+  {"user": "C", "balance": 0},
+  {"user": "D", "balance": 1357},
+  {"user": "E", "balance": 8}
+]

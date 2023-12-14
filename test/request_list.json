@@ -1,0 +1,15 @@
+[
+  [
+    {"from": "A", "to": "B", "amount": 0.1, "fee": 0},
+    {"from": "B", "to": "C", "amount": 9, "fee": 1},
+    {"from": "C", "to": "E", "amount": 9, "fee": 8}
+  ],
+  [
+    {"from": "D", "to": "A", "amount": 0.1, "fee": 10},
+    {"from": "C", "to": "B", "amount": 9, "fee": 2},
+    {"from": "D", "to": "C", "amount": 200, "fee": 0}
+  ],
+  [
+    {"from": "C", "to": "B", "amount": 40, "fee": 20}
+  ]
+]

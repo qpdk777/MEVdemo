@@ -1,0 +1,14 @@
+[
+  [
+    {"from": "114514", "to": "B", "amount": 0.1, "fee": 0}
+  ],
+  [
+    {"from": "A", "to": "114514", "amount": 0.1, "fee": 0}
+  ],
+  [
+    {"from": "A", "to": "B", "amount": -1, "fee": 0}
+  ],
+  [
+    {"from": "A", "to": "B", "amount": 0.1, "fee": -2}
+  ]
+]
